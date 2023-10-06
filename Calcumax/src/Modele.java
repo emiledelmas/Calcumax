@@ -1,4 +1,5 @@
 // Import Deque
+
 import java.util.Deque;
 // Import ArrayDeque
 import java.util.ArrayDeque;
@@ -18,55 +19,47 @@ public class Modele {
     // Create a deque of float
     private Deque<Double> deque;
     private double res;
-    
+
     // Constructor
     public Modele() {
-            deque = new ArrayDeque<Double>();
-            res = 0;
+        deque = new ArrayDeque<Double>();
+        res = 0;
     }
 
     // Create a getter for the res
     public double get_res() {
-    	return res;
+        return res;
     }
 
     // Fonction to add a number to the deque
     public void add_double_to_deque(double i) {
-        	deque.add((double) i);
+        deque.add((double) i);
     }
 
-    public void operation(int i){
-            // if deque length is more than 2
-            if (deque.size() > 1) {
-                // if i is 1,2,3 or 4
-                if (i > 0 && i < 5){
-                    double n1 = deque.pop();
-                    double n2 = deque.pop();
-
-                    if (i == 1){
-                        // Add the two last numbers of the deque
-                        res = n1 + n2;
-                    }
-                    else if (i == 2) {
-                        // Substract the two last numbers of the deque
-                        res = n1 - n2;
-                    }
-                    else if (i == 3) {
-                        // multiply the two last numbers of the deque
-                        res = n1 * n2;
-                    }
-                    else if (i == 4) {
-                        // Divide the two last numbers of the deque
-                        res = n1 / n2;
-                    }
-                    deque.add(res);
+    public void operation(String s) {
+        // if deque length is more than 2
+        if (deque.size() > 1) {
+            // if s is a +, -, *, / declare n1 and n2
+                double n1 = deque.pop();
+                double n2 = deque.pop();
+                if (s == "+") {
+                    // Add the two last numbers of the deque
+                    res = n1 + n2;
+                } else if (s == "-") {
+                    // Substract the two last numbers of the deque
+                    res = n1 - n2;
+                } else if (s == "*") {
+                    // multiply the two last numbers of the deque
+                    res = n1 * n2;
+                } else if (s == "/") {
+                    // Divide the two last numbers of the deque
+                    res = n1 / n2;
                 }
-             
-                // Add the two last numbers of the deque
-            }
-            else {
-                System.out.println("Not enough numbers in the deque");
-            }
+                deque.add(res);
+            // Add the two last numbers of the deque
+        } else {
+            System.out.println("Not enough numbers in the deque");
+        }
     }
-    
+
 }
