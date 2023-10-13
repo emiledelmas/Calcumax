@@ -8,9 +8,13 @@ import javafx.scene.control.Label;
 
 
 public class CalculatorControler implements CalculatorControlerInterface{
+    String accu;
+
+    public CalculatorControler() {
+        accu = "";
+    }
     @Override
     public void change(String accu) {
-
     }
 
     @Override
@@ -22,11 +26,15 @@ public class CalculatorControler implements CalculatorControlerInterface{
 
     @FXML
     private Label welcomeText;
+
+    @FXML
+    private Label screenText;
     private EventObject event;
 
     @FXML
-    protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
+    protected void press0() {
+        accu += "0";
+        screenText.setText(accu);
     }
 
     @FXML

@@ -13,7 +13,7 @@ public class CalculatorGUI extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(CalculatorGUI.class.getResource("hello-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 400, 500);
 
-        stage.setTitle("Hello!");
+        stage.setTitle("Calcultimate");
         stage.setScene(scene);
         stage.show();
     }
