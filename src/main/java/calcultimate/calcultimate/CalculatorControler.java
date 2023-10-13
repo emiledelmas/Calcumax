@@ -15,12 +15,13 @@ public class CalculatorControler implements CalculatorControlerInterface{
         m = new Modele();
     }
     @Override
-    public void change(String accu) {
+    public void change() {
         // convert string to double or int if its a int
         double d = Double.parseDouble(accu);
         // Convert to string
         m.push(d);
-        pressC();
+        accu = "";
+        screenText.setText(accu);
     }
 
     @Override
@@ -100,22 +101,38 @@ public class CalculatorControler implements CalculatorControlerInterface{
     }
     @FXML
     protected void pressminus() {
+        m.substract();
+        accu = Double.toString(m.result());
+        screenText.setText(accu);
     }
     @FXML
     protected void pressmult() {
+        m.multiply();
+        accu = Double.toString(m.result());
+        screenText.setText(accu);
     }
     @FXML
     protected void pressC() {
         accu = "";
+        m.clear();
         screenText.setText(accu);
     }
     @FXML
     protected void pressdivide() {
+        m.divide();
+        accu = Double.toString(m.result());
+        screenText.setText(accu);
     }
     @FXML
     protected void pressEnter() {
-        change(accu);
-
+        change();
+    }
+    @FXML
+    protected void pressBackSpace() {
+        if (accu.length() > 0) {
+            accu = accu.substring(0, accu.length() - 1);
+            screenText.setText(accu);
+        }
     }
     @FXML
     protected void presssign() {
@@ -128,22 +145,5 @@ public class CalculatorControler implements CalculatorControlerInterface{
             accu = Integer.toString(-d);
         }
         screenText.setText(accu);
-    }
-
-
-    @FXML
-    protected void handleButtonAction() {
-        //Get text from the button where the event happened
-        String text = ((Button)event.getSource()).getText();
-        welcomeText.setText(text);
-    }
-
-    @FXML
-    protected void handleClearAction() {
-        welcomeText.setText("Welcome to JavaFX Application!");
-    }
-    @FXML
-    protected void handleEqualsAction() {
-        welcomeText.setText("Welcome to JavaFX Application!");
     }
 }

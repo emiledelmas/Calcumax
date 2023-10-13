@@ -42,5 +42,6 @@
     <HBox spacing="10">
         <Button text="+/-" onAction="#presssign"/>
         <Button text="Enter" onAction="#pressEnter"/>
+        <Button text="&lt;---" onAction="#pressBackSpace"/>
     </HBox>
 </VBox>
