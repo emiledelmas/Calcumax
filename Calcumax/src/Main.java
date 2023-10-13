@@ -18,31 +18,30 @@ public class Main {
             //if it's a double
             if (sc.hasNextDouble()) {
                 // Add the double to the deque
-                modele.add_double_to_deque(sc.nextDouble());
+                modele.push(sc.nextDouble());
             }
             //else if it's a string
             else {
                 // if it's a +
                 if (sc.hasNext("\\+")) {
-                    modele.operation("+");
+                    modele.add();
                 }
                 // if it's a -
                 else if (sc.hasNext("-")) {
-                    modele.operation("-");
+                    modele.substract();
                 }
                 // if it's a *
                 else if (sc.hasNext("\\*")) {
-                    modele.operation("*");
+                    modele.multiply();
                 }
                 // if it's a /
                 else if (sc.hasNext("/")) {
-                    modele.operation("/");
+                    modele.divide();
                 } else {
                     System.out.println("Not a valid input");
                 }
             }
-            System.out.println(modele.get_res());
-
+            System.out.println(modele.result());
         }
     }
 }

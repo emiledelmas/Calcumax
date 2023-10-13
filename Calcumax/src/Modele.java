@@ -1,11 +1,10 @@
-// Import Deque
+// Import accu
 
-import java.util.Deque;
-// Import ArrayDeque
-import java.util.ArrayDeque;
+//import Stack
+import java.util.Stack;
 
 /*TODO
-- Change int i in operation to String "+"
+✓ Change int i in operation to String "+"
 - Backspace
 - Clear
 - Add a button to change the sign of the number
@@ -15,51 +14,87 @@ import java.util.ArrayDeque;
 - ",5" = 0.5
 
 */
-public class Modele {
-    // Create a deque of float
-    private Deque<Double> deque;
-    private double res;
+public class Modele implements CalculatorModelInterface {
+    // Create a accu of float
+    private Stack<Double> accu;
 
     // Constructor
     public Modele() {
-        deque = new ArrayDeque<Double>();
-        res = 0;
+        accu = new Stack<Double>();
     }
 
-    // Create a getter for the res
-    public double get_res() {
-        return res;
-    }
+    // Fonction to add a number to the accu
 
-    // Fonction to add a number to the deque
-    public void add_double_to_deque(double i) {
-        deque.add((double) i);
-    }
-
-    public void operation(String s) {
-        // if deque length is more than 2
-        if (deque.size() > 1) {
-            // if s is a +, -, *, / declare n1 and n2
-                double n1 = deque.pop();
-                double n2 = deque.pop();
-                if (s == "+") {
-                    // Add the two last numbers of the deque
-                    res = n1 + n2;
-                } else if (s == "-") {
-                    // Substract the two last numbers of the deque
-                    res = n1 - n2;
-                } else if (s == "*") {
-                    // multiply the two last numbers of the deque
-                    res = n1 * n2;
-                } else if (s == "/") {
-                    // Divide the two last numbers of the deque
-                    res = n1 / n2;
-                }
-                deque.add(res);
-            // Add the two last numbers of the deque
-        } else {
-            System.out.println("Not enough numbers in the deque");
+    public void add() {
+        if (accu.size() > 1) {
+            double n1 = accu.pop();
+            double n2 = accu.pop();
+            accu.add(n1 + n2);
         }
     }
 
+    public void substract() {
+        if (accu.size() > 1) {
+            double n1 = accu.pop();
+            double n2 = accu.pop();
+            accu.add(n1 - n2);
+        }
+    }
+
+    public void multiply() {
+        if (accu.size() > 1) {
+            double n1 = accu.pop();
+            double n2 = accu.pop();
+            accu.add(n1 * n2);
+        }
+    }
+
+    public void divide() {
+        if (accu.size() > 1) {
+            double n1 = accu.pop();
+            double n2 = accu.pop();
+            if (n2 == 0) {
+                System.out.println("You can't divide by 0");
+            }
+            else {
+            accu.add(n1 / n2);
+            }
+        }
+    }
+
+    public void opposite() {
+        if (!accu.isEmpty()) {
+            double n1 = accu.pop();
+            accu.add(-n1);
+        }
+    }
+
+    public void push(double number) {
+        accu.push(number);
+    }
+
+    public double pop() {
+            return accu.pop();
+    }
+
+    public void drop() {
+        accu.pop();
+    }
+
+    public void swap() {
+        if (accu.size() > 1) {
+            double n1 = accu.pop();
+            double n2 = accu.pop();
+            accu.add(n1);
+            accu.add(n2);
+        }
+    }
+
+    public void clear() {
+        accu.clear();
+    }
+
+    public double result(){
+        return accu.peek();
+    }
 }
