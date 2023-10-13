@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.opensup.testfx.HelloController"
+      alignment="CENTER" spacing="10" style="-fx-font-size: 300%;">
+
+    <Label fx:id="welcomeText" text="Calcumax"/> <!-- Added welcomeText label -->
+
+    <!-- New label with rectangle stroke -->
+    <Label text="12345" style="-fx-font-family: 'Hack Nerd Font' ; -fx-font-size: 72px;">
+    </Label>
+
+    <HBox spacing="10">
+        <Button text="7" onAction="#handleButtonAction"/>
+        <Button text="8" onAction="#handleButtonAction"/>
+        <Button text="9" onAction="#handleButtonAction"/>
+        <Button text="+" onAction="#handleButtonAction"/>
+    </HBox>
+    <HBox spacing="10">
+        <Button text="4" onAction="#handleButtonAction"/>
+        <Button text="5" onAction="#handleButtonAction"/>
+        <Button text="6" onAction="#handleButtonAction"/>
+        <Button text="-" onAction="#handleButtonAction"/>
+    </HBox>
+    <HBox spacing="10">
+        <Button text="1" onAction="#handleButtonAction"/>
+        <Button text="2" onAction="#handleButtonAction"/>
+        <Button text="3" onAction="#handleButtonAction"/>
+        <Button text="x" onAction="#handleButtonAction"/>
+    </HBox>
+    <HBox spacing="10">
+        <Button text="C" onAction="#handleClearAction"/>
+        <Button text="0" onAction="#handleButtonAction"/>
+        <Button text="," onAction="#handleEqualsAction"/>
+        <Button text="/" onAction="#handleButtonAction"/>
+    </HBox>
+</VBox>
