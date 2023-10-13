@@ -1,8 +1,8 @@
-module com.opensup.testfx {
+module calcultimate.calcultimate {
     requires javafx.controls;
     requires javafx.fxml;
 
 
-    opens com.opensup.testfx to javafx.fxml;
-    exports com.opensup.testfx;
+    opens calcultimate.calcultimate to javafx.fxml;
+    exports calcultimate.calcultimate;
 }
