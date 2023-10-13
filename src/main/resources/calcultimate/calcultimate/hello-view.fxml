@@ -9,34 +9,38 @@
       fx:controller="calcultimate.calcultimate.CalculatorControler"
       alignment="CENTER" spacing="10" style="-fx-font-size: 300%;">
 
-    <Label fx:id="welcomeText" text="Calcumax"/> <!-- Added welcomeText label -->
+    <Label fx:id="welcomeText" text="Calcultimate"/> <!-- Added welcomeText label -->
 
     <!-- New label with rectangle stroke -->
-    <Label text="12345" style="-fx-font-family: 'Hack Nerd Font' ; -fx-font-size: 72px;">
+    <Label text="" fx:id="screenText" style="-fx-font-family: 'Hack Nerd Font' ; -fx-font-size: 30px;">
     </Label>
 
     <HBox spacing="10">
-        <Button text="7" onAction="#handleButtonAction"/>
-        <Button text="8" onAction="#handleButtonAction"/>
-        <Button text="9" onAction="#handleButtonAction"/>
-        <Button text="+" onAction="#handleButtonAction"/>
+        <Button text="7" onAction="#press7"/>
+        <Button text="8" onAction="#press8"/>
+        <Button text="9" onAction="#press9"/>
+        <Button text="+" onAction="#pressplus"/>
     </HBox>
     <HBox spacing="10">
-        <Button text="4" onAction="#handleButtonAction"/>
-        <Button text="5" onAction="#handleButtonAction"/>
-        <Button text="6" onAction="#handleButtonAction"/>
-        <Button text="-" onAction="#handleButtonAction"/>
+        <Button text="4" onAction="#press4"/>
+        <Button text="5" onAction="#press5"/>
+        <Button text="6" onAction="#press6"/>
+        <Button text="-" onAction="#pressminus"/>
     </HBox>
     <HBox spacing="10">
-        <Button text="1" onAction="#handleButtonAction"/>
-        <Button text="2" onAction="#handleButtonAction"/>
-        <Button text="3" onAction="#handleButtonAction"/>
-        <Button text="x" onAction="#handleButtonAction"/>
+        <Button text="1" onAction="#press1"/>
+        <Button text="2" onAction="#press2"/>
+        <Button text="3" onAction="#press3"/>
+        <Button text="x" onAction="#pressmult"/>
     </HBox>
     <HBox spacing="10">
-        <Button text="C" onAction="#handleClearAction"/>
-        <Button text="0" onAction="#handleButtonAction"/>
-        <Button text="," onAction="#handleEqualsAction"/>
-        <Button text="/" onAction="#handleButtonAction"/>
+        <Button text="C" onAction="#pressC"/>
+        <Button text="0" onAction="#press0"/>
+        <Button text="," onAction="#pressdot"/>
+        <Button text="/" onAction="#pressdivide"/>
+    </HBox>
+    <HBox spacing="10">
+        <Button text="+/-" onAction="#presssign"/>
+        <Button text="Enter" onAction="#pressEnter"/>
     </HBox>
 </VBox>

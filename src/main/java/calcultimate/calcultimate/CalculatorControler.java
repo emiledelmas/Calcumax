@@ -36,6 +36,90 @@ public class CalculatorControler implements CalculatorControlerInterface{
         accu += "0";
         screenText.setText(accu);
     }
+    @FXML
+    protected void press1() {
+        accu += "1";
+        screenText.setText(accu);
+    }
+    @FXML
+    protected void press2() {
+        accu += "2";
+        screenText.setText(accu);
+    }
+    @FXML
+    protected void press3() {
+        accu += "3";
+        screenText.setText(accu);
+    }
+    @FXML
+    protected void press4() {
+        accu += "4";
+        screenText.setText(accu);
+    }
+    @FXML
+    protected void press5() {
+        accu += "5";
+        screenText.setText(accu);
+    }
+    @FXML
+    protected void press6() {
+        accu += "6";
+        screenText.setText(accu);
+    }
+    @FXML
+    protected void press7() {
+        accu += "7";
+        screenText.setText(accu);
+    }
+    @FXML
+    protected void press8() {
+        accu += "8";
+        screenText.setText(accu);
+    }
+    @FXML
+    protected void press9() {
+        accu += "9";
+        screenText.setText(accu);
+    }
+    @FXML
+    protected void pressdot() {
+        accu += ".";
+        screenText.setText(accu);
+    }
+    @FXML
+    protected void pressplus() {
+    }
+    @FXML
+    protected void pressminus() {
+    }
+    @FXML
+    protected void pressmult() {
+    }
+    @FXML
+    protected void pressC() {
+        accu = "";
+        screenText.setText(accu);
+    }
+    @FXML
+    protected void pressdivide() {
+    }
+    @FXML
+    protected void pressEnter() {
+        change(accu);
+    }
+    @FXML
+    protected void presssign() {
+        if (accu.contains(".")) {
+            double d = Double.parseDouble(accu);
+            accu = Double.toString(-d);
+        }
+        else{
+            int d = Integer.parseInt(accu);
+            accu = Integer.toString(-d);
+        }
+        screenText.setText(accu);
+    }
+
 
     @FXML
     protected void handleButtonAction() {

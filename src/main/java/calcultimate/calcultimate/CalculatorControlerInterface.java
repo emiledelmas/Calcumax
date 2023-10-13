@@ -7,4 +7,5 @@ public interface CalculatorControlerInterface {
 
     public void change(List<Double> StackData);
 
+
 }
