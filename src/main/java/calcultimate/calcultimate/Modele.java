@@ -1,4 +1,4 @@
-package calcultimate.calcultimate;// Import accu
+package calcultimate.calcultimate;// Import memory
 
 //import Stack
 import java.util.Stack;
@@ -15,86 +15,87 @@ import java.util.Stack;
 
 */
 public class Modele implements CalculatorModelInterface {
-    // Create a accu of float
-    private Stack<Double> accu;
-
+    // Create a memory of float
+    private Stack<Double> memory;
+    private double accu;
     // Constructor
     public Modele() {
-        accu = new Stack<Double>();
+        memory = new Stack<Double>();
+        accu = 0;
     }
 
-    // Fonction to add a number to the accu
+    // Fonction to add a number to the memory
 
     public void add() {
-        if (accu.size() > 1) {
-            double n1 = accu.pop();
-            double n2 = accu.pop();
-            accu.add(n1 + n2);
+        if (memory.size() > 1) {
+            double n1 = memory.pop();
+            double n2 = memory.pop();
+            memory.add(n1 + n2);
         }
     }
 
     public void substract() {
-        if (accu.size() > 1) {
-            double n1 = accu.pop();
-            double n2 = accu.pop();
-            accu.add(n1 - n2);
+        if (memory.size() > 1) {
+            double n1 = memory.pop();
+            double n2 = memory.pop();
+            memory.add(n1 - n2);
         }
     }
 
     public void multiply() {
-        if (accu.size() > 1) {
-            double n1 = accu.pop();
-            double n2 = accu.pop();
-            accu.add(n1 * n2);
+        if (memory.size() > 1) {
+            double n1 = memory.pop();
+            double n2 = memory.pop();
+            memory.add(n1 * n2);
         }
     }
 
     public void divide() {
-        if (accu.size() > 1) {
-            double n1 = accu.pop();
-            double n2 = accu.pop();
+        if (memory.size() > 1) {
+            double n1 = memory.pop();
+            double n2 = memory.pop();
             if (n2 == 0) {
                 System.out.println("You can't divide by 0");
             }
             else {
-            accu.add(n1 / n2);
+            memory.add(n1 / n2);
             }
         }
     }
 
     public void opposite() {
-        if (!accu.isEmpty()) {
-            double n1 = accu.pop();
-            accu.add(-n1);
+        if (!memory.isEmpty()) {
+            double n1 = memory.pop();
+            memory.add(-n1);
         }
     }
 
     public void push(double number) {
-        accu.push(number);
+        memory.push(number);
     }
 
     public double pop() {
-            return accu.pop();
+            return memory.pop();
     }
 
     public void drop() {
-        accu.pop();
+        memory.peek();
     }
 
     public void swap() {
-        if (accu.size() > 1) {
-            double n1 = accu.pop();
-            double n2 = accu.pop();
-            accu.add(n1);
-            accu.add(n2);
+        if (memory.size() > 1) {
+            double n1 = memory.pop();
+            double n2 = memory.pop();
+            memory.add(n1);
+            memory.add(n2);
         }
     }
 
     public void clear() {
-        accu.clear();
+        memory.clear();
     }
 
     public double result(){
-        return accu.peek();
+        return memory.peek();
     }
 }

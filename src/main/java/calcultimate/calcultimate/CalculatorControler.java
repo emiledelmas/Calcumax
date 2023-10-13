@@ -9,12 +9,18 @@ import javafx.scene.control.Label;
 
 public class CalculatorControler implements CalculatorControlerInterface{
     String accu;
-
+    Modele m;
     public CalculatorControler() {
         accu = "";
+        m = new Modele();
     }
     @Override
     public void change(String accu) {
+        // convert string to double or int if its a int
+        double d = Double.parseDouble(accu);
+        // Convert to string
+        m.push(d);
+        pressC();
     }
 
     @Override
@@ -33,7 +39,7 @@ public class CalculatorControler implements CalculatorControlerInterface{
 
     @FXML
     protected void press0() {
-        accu += "0";
+        accu += "1";
         screenText.setText(accu);
     }
     @FXML
@@ -88,6 +94,9 @@ public class CalculatorControler implements CalculatorControlerInterface{
     }
     @FXML
     protected void pressplus() {
+        m.add();
+        accu = Double.toString(m.result());
+        screenText.setText(accu);
     }
     @FXML
     protected void pressminus() {
@@ -106,6 +115,7 @@ public class CalculatorControler implements CalculatorControlerInterface{
     @FXML
     protected void pressEnter() {
         change(accu);
+
     }
     @FXML
     protected void presssign() {
