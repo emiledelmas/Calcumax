@@ -38,6 +38,11 @@ public class CalculatorControler implements CalculatorControlerInterface{
     private Label screenText;
     private EventObject event;
 
+    public void changeIfAccuIsNotEmpty() {
+        if (accu != "") {
+            change();
+        }
+    }
     @FXML
     protected void press0() {
         accu += "1";
@@ -95,30 +100,35 @@ public class CalculatorControler implements CalculatorControlerInterface{
     }
     @FXML
     protected void pressplus() {
+        changeIfAccuIsNotEmpty();
         m.add();
         accu = Double.toString(m.result());
         screenText.setText(accu);
     }
     @FXML
     protected void pressminus() {
+        changeIfAccuIsNotEmpty();
         m.substract();
         accu = Double.toString(m.result());
         screenText.setText(accu);
     }
     @FXML
     protected void pressmult() {
+        changeIfAccuIsNotEmpty();
         m.multiply();
         accu = Double.toString(m.result());
         screenText.setText(accu);
     }
     @FXML
     protected void pressC() {
+        changeIfAccuIsNotEmpty();
         accu = "";
         m.clear();
         screenText.setText(accu);
     }
     @FXML
     protected void pressdivide() {
+        changeIfAccuIsNotEmpty();
         m.divide();
         accu = Double.toString(m.result());
         screenText.setText(accu);

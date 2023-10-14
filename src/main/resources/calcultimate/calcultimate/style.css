@@ -1,0 +1,13 @@
+.button {
+    -fx-min-width: 150px;
+    -fx-max-width: 150px;
+}
+.enterButton {
+    -fx-min-width: 630px;
+    -fx-max-width: 630px;
+}
+
+
+.button:pressed {
+    -fx-translate-y: 4px;
+}
