@@ -2,6 +2,8 @@ package calcultimate.calcultimate;
 
 import java.util.EventObject;
 import java.util.List;
+import java.util.Stack;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -15,18 +17,33 @@ public class CalculatorControler implements CalculatorControlerInterface{
         m = new CalculatorModel();
     }
 
+
+    @Override
+    public void change(String accu) {
+
+    }
+
+    @Override
+    public void change(Stack<Double> StackData) {
+    }
+
     public void change() {
         // convert string to double or int if its a int
         double d = Double.parseDouble(accu);
         // Convert to string
         m.push(d);
-        screenText1.setText(screenText2.getText());
+//        If there is a value in screenText1
+        if (screenText1.getText() != "") {
+            screenText2.setText(screenText1.getText());
+            screenText1.setText(screenText.getText());
+        }
+        else {
+            screenText1.setText(screenText.getText());
+        }
         accu = "";
         screenText.setText(accu);
-
     }
 
-    @Override
     public void change(List<Double> StackData) {
 
     }
@@ -95,7 +112,7 @@ public class CalculatorControler implements CalculatorControlerInterface{
         accu += "8";
         screenText.setText(accu);
     }
-    @FXML
+        @FXML
     protected void press9() {
         accu += "9";
         screenText.setText(accu);
@@ -111,36 +128,37 @@ public class CalculatorControler implements CalculatorControlerInterface{
     protected void pressplus() {
         changeIfAccuIsNotEmpty();
         m.add();
-        accu = Double.toString(m.result());
-        screenText.setText(accu);
+        accu = "";
+        screenText1.setText(Double.toString(m.result()));
     }
     @FXML
     protected void pressminus() {
         changeIfAccuIsNotEmpty();
         m.substract();
-        accu = Double.toString(m.result());
-        screenText.setText(accu);
+        accu = "";
+        screenText1.setText(Double.toString(m.result()));
     }
     @FXML
     protected void pressmult() {
         changeIfAccuIsNotEmpty();
         m.multiply();
-        accu = Double.toString(m.result());
-        screenText.setText(accu);
+        accu = "";
+        screenText1.setText(Double.toString(m.result()));
     }
     @FXML
     protected void pressC() {
         changeIfAccuIsNotEmpty();
         accu = "";
-        m.clear();
         screenText.setText(accu);
+        screenText1.setText(accu);
+        screenText2.setText(accu);
     }
     @FXML
     protected void pressdivide() {
         changeIfAccuIsNotEmpty();
         m.divide();
-        accu = Double.toString(m.result());
-        screenText.setText(accu);
+        accu = "";
+        screenText1.setText(Double.toString(m.result()));
     }
     @FXML
     protected void pressEnter() {

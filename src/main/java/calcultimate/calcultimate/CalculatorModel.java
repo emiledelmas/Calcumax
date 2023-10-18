@@ -47,7 +47,7 @@ public class CalculatorModel implements CalculatorModelInterface {
                 System.out.println("You can't divide by 0");
             }
             else {
-            memory.add(n1 / n2);
+                memory.add(n1 / n2);
             }
         }
     }
@@ -64,7 +64,7 @@ public class CalculatorModel implements CalculatorModelInterface {
     }
 
     public double pop() {
-            return memory.pop();
+        return memory.pop();
     }
 
     public void drop() {
