@@ -84,7 +84,9 @@ public class CalculatorModel implements CalculatorModelInterface {
         memory.clear();
     }
 
-    public double result(){
-        return memory.peek();
+    public Stack<Double> getterMemory(){
+        return memory;
     }
+
+
 }

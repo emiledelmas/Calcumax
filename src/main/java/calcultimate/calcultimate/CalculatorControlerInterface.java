@@ -1,11 +1,11 @@
 package calcultimate.calcultimate;
 
-import java.util.List;
+import java.util.Stack;
 
 public interface CalculatorControlerInterface {
-    public void change();
+    public double change(String accu);
 
-    public void change(List<Double> StackData);
+    public String change(Stack<Double> StackData);
 
 
 }
