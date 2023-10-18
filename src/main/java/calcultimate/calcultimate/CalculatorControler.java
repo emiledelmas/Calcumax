@@ -9,19 +9,21 @@ import javafx.scene.control.Label;
 
 public class CalculatorControler implements CalculatorControlerInterface{
     String accu;
-    Modele m;
+    CalculatorModel m;
     public CalculatorControler() {
         accu = "";
-        m = new Modele();
+        m = new CalculatorModel();
     }
-    @Override
+
     public void change() {
         // convert string to double or int if its a int
         double d = Double.parseDouble(accu);
         // Convert to string
         m.push(d);
+        screenText1.setText(screenText2.getText());
         accu = "";
         screenText.setText(accu);
+
     }
 
     @Override
@@ -36,6 +38,11 @@ public class CalculatorControler implements CalculatorControlerInterface{
 
     @FXML
     private Label screenText;
+    @FXML
+    private Label screenText1;
+    @FXML
+    private Label screenText2;
+
     private EventObject event;
 
     public void changeIfAccuIsNotEmpty() {
@@ -95,8 +102,10 @@ public class CalculatorControler implements CalculatorControlerInterface{
     }
     @FXML
     protected void pressdot() {
-        accu += ".";
-        screenText.setText(accu);
+        if (!accu.contains(".")) {
+            accu += ".";
+            screenText.setText(accu);
+        }
     }
     @FXML
     protected void pressplus() {
@@ -139,7 +148,7 @@ public class CalculatorControler implements CalculatorControlerInterface{
     }
     @FXML
     protected void pressBackSpace() {
-        if (accu.length() > 0) {
+        if (!accu.isEmpty()) {
             accu = accu.substring(0, accu.length() - 1);
             screenText.setText(accu);
         }
