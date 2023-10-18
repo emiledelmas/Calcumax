@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <VBox xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="calcultimate.calcultimate.CalculatorControler"
+      fx:controller="calcultimate.calcultimate.Main"
       alignment="CENTER" spacing="10" style="-fx-font-size: 300%;">
 
     <Label fx:id="welcomeText" text="Calcultimate"/>
