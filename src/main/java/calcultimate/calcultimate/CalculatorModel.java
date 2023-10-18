@@ -3,23 +3,12 @@ package calcultimate.calcultimate;// Import memory
 //import Stack
 import java.util.Stack;
 
-/*TODO
-✓ Change int i in operation to String "+"
-- Backspace
-- Clear
-- Add a button to change the sign of the number
-- push(), pop(), drop(), swap(), clear() and add()
-- Divide by 0 rule
-- enter number digit by digit in a string and concatenate (test every time if it's a number)
-- ",5" = 0.5
-
-*/
-public class Modele implements CalculatorModelInterface {
+public class CalculatorModel implements CalculatorModelInterface {
     // Create a memory of float
     private Stack<Double> memory;
     private double accu;
     // Constructor
-    public Modele() {
+    public CalculatorModel() {
         memory = new Stack<Double>();
         accu = 0;
     }
@@ -79,7 +68,7 @@ public class Modele implements CalculatorModelInterface {
     }
 
     public void drop() {
-        memory.peek();
+        memory.pop();
     }
 
     public void swap() {

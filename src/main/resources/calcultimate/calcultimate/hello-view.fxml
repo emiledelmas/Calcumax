@@ -12,8 +12,9 @@
     <Label fx:id="welcomeText" text="Calcultimate"/>
 
     <!-- New label with rectangle stroke -->
-    <Label text="" fx:id="screenText" style="-fx-font-family: 'Hack Nerd Font' ; -fx-font-size: 30px;">
-    </Label>
+    <Label text="" fx:id="screenText" style="-fx-font-family: 'Hack Nerd Font' ; -fx-font-size: 30px;"></Label>
+    <Label text="" fx:id="screenText1" style="-fx-font-family: 'Hack Nerd Font' ; -fx-font-size: 30px;"></Label>
+    <Label text="" fx:id="screenText2" style="-fx-font-family: 'Hack Nerd Font' ; -fx-font-size: 30px;"></Label>
     <HBox spacing="330">
         <Button text="C" onAction="#pressC"/>
         <Button text="←" onAction="#pressBackSpace"/>

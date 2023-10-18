@@ -24,4 +24,9 @@ public class CalculatorGUI extends Application {
         launch();
     }
 
+    // Add a function named 'change' to change the GUI interface
+    public void change(String accu) {
+
+    }
+
 }
