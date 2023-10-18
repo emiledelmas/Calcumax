@@ -3,9 +3,10 @@ package calcultimate.calcultimate;
 import java.util.Stack;
 
 public interface CalculatorControlerInterface {
-    public double change(String accu);
+    public void change(String accu);
 
-    public String change(Stack<Double> StackData);
+    public void change(Stack<Double> StackData);
+
 
 
 }
