@@ -11,14 +11,17 @@ public class CalculatorGUI extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(CalculatorGUI.class.getResource("hello-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 400, 500);
-
+        Scene scene = new Scene(fxmlLoader.load(), 630, 700);
+        // width of Button fixed to 100 and height to 50
+        scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
         stage.setTitle("Calcultimate");
         stage.setScene(scene);
         stage.show();
     }
 
-    public static void main(String[] args) {
+    // Add a function named 'affiche' to show the GUI interface
+    public void affiche() {
         launch();
     }
+
 }

@@ -9,12 +9,15 @@
       fx:controller="calcultimate.calcultimate.CalculatorControler"
       alignment="CENTER" spacing="10" style="-fx-font-size: 300%;">
 
-    <Label fx:id="welcomeText" text="Calcultimate"/> <!-- Added welcomeText label -->
+    <Label fx:id="welcomeText" text="Calcultimate"/>
 
     <!-- New label with rectangle stroke -->
     <Label text="" fx:id="screenText" style="-fx-font-family: 'Hack Nerd Font' ; -fx-font-size: 30px;">
     </Label>
-
+    <HBox spacing="330">
+        <Button text="C" onAction="#pressC"/>
+        <Button text="←" onAction="#pressBackSpace"/>
+    </HBox>
     <HBox spacing="10">
         <Button text="7" onAction="#press7"/>
         <Button text="8" onAction="#press8"/>
@@ -31,17 +34,15 @@
         <Button text="1" onAction="#press1"/>
         <Button text="2" onAction="#press2"/>
         <Button text="3" onAction="#press3"/>
-        <Button text="x" onAction="#pressmult"/>
+        <Button text="×" onAction="#pressmult"/>
     </HBox>
     <HBox spacing="10">
-        <Button text="C" onAction="#pressC"/>
+        <Button text="+/-" onAction="#presssign" />
         <Button text="0" onAction="#press0"/>
         <Button text="," onAction="#pressdot"/>
         <Button text="/" onAction="#pressdivide"/>
     </HBox>
     <HBox spacing="10">
-        <Button text="+/-" onAction="#presssign"/>
-        <Button text="Enter" onAction="#pressEnter"/>
-        <Button text="&lt;---" onAction="#pressBackSpace"/>
+        <Button text="Enter" onAction="#pressEnter" styleClass="enterButton"/>
     </HBox>
 </VBox>
