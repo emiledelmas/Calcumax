@@ -45,7 +45,7 @@ public class CalculatorControler implements CalculatorControlerInterface{
     }
     @FXML
     protected void press0() {
-        accu += "1";
+        accu += "0";
         screenText.setText(accu);
     }
     @FXML

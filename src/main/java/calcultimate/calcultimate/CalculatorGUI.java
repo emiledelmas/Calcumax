@@ -19,7 +19,9 @@ public class CalculatorGUI extends Application {
         stage.show();
     }
 
-    public static void main(String[] args) {
+    // Add a function named 'affiche' to show the GUI interface
+    public void affiche() {
         launch();
     }
+
 }
