@@ -11,3 +11,9 @@
 .button:pressed {
     -fx-translate-y: 4px;
 }
+
+
+.label {
+    -fx-stroke: black;
+    -fx-font-size: 20px;
+}

@@ -7,6 +7,7 @@ import java.util.Stack;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 
 
 public class CalculatorControler implements CalculatorControlerInterface{
@@ -32,14 +33,9 @@ public class CalculatorControler implements CalculatorControlerInterface{
         double d = Double.parseDouble(accu);
         // Convert to string
         m.push(d);
-//        If there is a value in screenText1
-        if (screenText1.getText() != "") {
-            screenText2.setText(screenText1.getText());
-            screenText1.setText(screenText.getText());
-        }
-        else {
-            screenText1.setText(screenText.getText());
-        }
+//        We have to push the number in the screenText1, screenText2 if Enter is pressed
+        screenText2.setText(screenText1.getText());
+        screenText1.setText(screenText.getText());
         accu = "";
         screenText.setText(accu);
     }
@@ -54,11 +50,11 @@ public class CalculatorControler implements CalculatorControlerInterface{
     private Label welcomeText;
 
     @FXML
-    private Label screenText;
+    private TextField screenText;
     @FXML
-    private Label screenText1;
+    private TextField screenText1;
     @FXML
-    private Label screenText2;
+    private TextField screenText2;
 
     private EventObject event;
 
@@ -130,6 +126,7 @@ public class CalculatorControler implements CalculatorControlerInterface{
         m.add();
         accu = "";
         screenText1.setText(Double.toString(m.result()));
+        screenText2.setText("");
     }
     @FXML
     protected void pressminus() {
@@ -137,6 +134,7 @@ public class CalculatorControler implements CalculatorControlerInterface{
         m.substract();
         accu = "";
         screenText1.setText(Double.toString(m.result()));
+        screenText2.setText("");
     }
     @FXML
     protected void pressmult() {
@@ -144,6 +142,7 @@ public class CalculatorControler implements CalculatorControlerInterface{
         m.multiply();
         accu = "";
         screenText1.setText(Double.toString(m.result()));
+        screenText2.setText("");
     }
     @FXML
     protected void pressC() {
@@ -159,6 +158,7 @@ public class CalculatorControler implements CalculatorControlerInterface{
         m.divide();
         accu = "";
         screenText1.setText(Double.toString(m.result()));
+        screenText2.setText("");
     }
     @FXML
     protected void pressEnter() {
@@ -173,14 +173,23 @@ public class CalculatorControler implements CalculatorControlerInterface{
     }
     @FXML
     protected void presssign() {
+        if (accu != "") {
+
+        
         if (accu.contains(".")) {
             double d = Double.parseDouble(accu);
             accu = Double.toString(-d);
-        }
-        else{
+        } else {
             int d = Integer.parseInt(accu);
             accu = Integer.toString(-d);
         }
+
         screenText.setText(accu);
+    }
+        else {
+            m.opposite();
+            screenText1.setText(Double.toString(m.result()));
+            screenText2.setText("");
+            }
     }
 }

@@ -4,6 +4,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.TextField?>
+
 
 <VBox xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="calcultimate.calcultimate.CalculatorControler"
@@ -12,9 +14,12 @@
     <Label fx:id="welcomeText" text="Calcultimate"/>
 
     <!-- New label with rectangle stroke -->
-    <Label text="" fx:id="screenText2" style="-fx-font-family: 'Hack Nerd Font' ; -fx-font-size: 30px;"></Label>
-    <Label text="" fx:id="screenText1" style="-fx-font-family: 'Hack Nerd Font' ; -fx-font-size: 30px;"></Label>
-    <Label text="" fx:id="screenText" style="-fx-font-family: 'Hack Nerd Font' ; -fx-font-size: 30px;"></Label>
+    <TextField text="" fx:id="screenText2" style="-fx-font-family: 'Hack Nerd Font' ; -fx-font-size: 30px;"
+               disable="true"/>
+    <TextField text="" fx:id="screenText1" style="-fx-font-family: 'Hack Nerd Font' ; -fx-font-size: 30px;"
+               disable="true"/>
+    <TextField text="" fx:id="screenText" style="-fx-font-family: 'Hack Nerd Font' ; -fx-font-size: 30px;"
+               disable="true"/>
     <HBox spacing="330">
         <Button text="C" onAction="#pressC"/>
         <Button text="←" onAction="#pressBackSpace"/>
