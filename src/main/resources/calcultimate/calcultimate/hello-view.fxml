@@ -9,19 +9,19 @@
 
 <VBox xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="calcultimate.calcultimate.CalculatorControler"
-      alignment="CENTER" spacing="10" style="-fx-font-size: 300%;">
+      alignment="CENTER" spacing="10" style="-fx-font-size: 300%;-fx-background-color: #1D1D1D">
 
-    <Label fx:id="welcomeText" text="Calcultimate"/>
+    <Label fx:id="welcomeText" text="Calcultimate" styleClass="welcomeText"/>
 
     <!-- New label with rectangle stroke -->
-    <TextField text="" fx:id="screenText2" style="-fx-font-family: 'Hack Nerd Font' ; -fx-font-size: 30px;"
+    <TextField text="" fx:id="screenText2" styleClass="screenText"
                disable="true"/>
-    <TextField text="" fx:id="screenText1" style="-fx-font-family: 'Hack Nerd Font' ; -fx-font-size: 30px;"
+    <TextField text="" fx:id="screenText1" styleClass="screenText"
                disable="true"/>
-    <TextField text="" fx:id="screenText" style="-fx-font-family: 'Hack Nerd Font' ; -fx-font-size: 30px;"
+    <TextField text="" fx:id="screenText" styleClass="screenText"
                disable="true"/>
     <HBox spacing="330">
-        <Button text="C" onAction="#pressC"/>
+        <Button text="C" onAction="#pressC" styleClass="clear-button"/>
         <Button text="←" onAction="#pressBackSpace"/>
     </HBox>
     <HBox spacing="10">

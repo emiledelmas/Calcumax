@@ -27,7 +27,7 @@ public class CalculatorModel implements CalculatorModelInterface {
         if (memory.size() > 1) {
             double n1 = memory.pop();
             double n2 = memory.pop();
-            memory.add(n1 - n2);
+            memory.add(n2 - n1);
         }
     }
 
@@ -64,7 +64,7 @@ public class CalculatorModel implements CalculatorModelInterface {
     }
 
     public double pop() {
-        return memory.pop();
+            return memory.pop();
     }
 
     public void drop() {
@@ -84,7 +84,16 @@ public class CalculatorModel implements CalculatorModelInterface {
         memory.clear();
     }
 
-    public double result(){
-        return memory.peek();
+    public double memoryGetter(int i) {
+        if (i < 0) {
+            return memory.get(memory.size() + i);
+        }
+        else {
+            return memory.get(i);
+        }
     }
+    public int getMemorySize() {
+        return memory.size();
+    }
+
 }
