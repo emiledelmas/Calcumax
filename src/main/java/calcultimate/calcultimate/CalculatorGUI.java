@@ -99,10 +99,4 @@ public class CalculatorGUI extends Application {
     public void affiche() {
         launch();
     }
-
-    // Add a function named 'change' to change the GUI interface
-    public void change(String accu) {
-
-    }
-
 }

@@ -4,17 +4,17 @@ package calcultimate.calcultimate;// Import memory
 import java.util.Stack;
 
 public class CalculatorModel implements CalculatorModelInterface {
-    // Create a memory of float
+    // Create a memory of double
     private Stack<Double> memory;
     private double accu;
+
     // Constructor
     public CalculatorModel() {
         memory = new Stack<Double>();
         accu = 0;
     }
 
-    // Fonction to add a number to the memory
-
+    // operations methods
     public void add() {
         if (memory.size() > 1) {
             double n1 = memory.pop();
@@ -52,6 +52,7 @@ public class CalculatorModel implements CalculatorModelInterface {
         }
     }
 
+    // method corresponding to sign changing button
     public void opposite() {
         if (!memory.isEmpty()) {
             double n1 = memory.pop();
@@ -59,6 +60,7 @@ public class CalculatorModel implements CalculatorModelInterface {
         }
     }
 
+    // Classical methods for stacks
     public void push(double number) {
         memory.push(number);
     }
@@ -84,6 +86,7 @@ public class CalculatorModel implements CalculatorModelInterface {
         memory.clear();
     }
 
+    //Getters
     public double memoryGetter(int i) {
         if (i < 0) {
             return memory.get(memory.size() + i);
