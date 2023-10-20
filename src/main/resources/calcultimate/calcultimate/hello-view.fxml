@@ -22,33 +22,33 @@
                disable="true"/>
     <HBox spacing="330">
         <Button text="C" onAction="#pressC" styleClass="clear-button"/>
-        <Button text="←" onAction="#pressBackSpace"/>
+        <Button text="←" onAction="#pressBackSpace" fx:id="backspace"/>
     </HBox>
     <HBox spacing="10">
-        <Button text="7" onAction="#press7"/>
-        <Button text="8" onAction="#press8"/>
-        <Button text="9" onAction="#press9"/>
-        <Button text="+" onAction="#pressplus"/>
+        <Button text="7" onAction="#press7" fx:id="7"/>
+        <Button text="8" onAction="#press8" fx:id="8"/>
+        <Button text="9" onAction="#press9" fx:id="9"/>
+        <Button text="+" onAction="#pressplus" fx:id="plus"/>
     </HBox>
     <HBox spacing="10">
-        <Button text="4" onAction="#press4"/>
-        <Button text="5" onAction="#press5"/>
-        <Button text="6" onAction="#press6"/>
-        <Button text="-" onAction="#pressminus"/>
+        <Button text="4" onAction="#press4" fx:id="4"/>
+        <Button text="5" onAction="#press5" fx:id="5"/>
+        <Button text="6" onAction="#press6" fx:id="6"/>
+        <Button text="-" onAction="#pressminus" fx:id="minus"/>
     </HBox>
     <HBox spacing="10">
-        <Button text="1" onAction="#press1"/>
-        <Button text="2" onAction="#press2"/>
-        <Button text="3" onAction="#press3"/>
-        <Button text="×" onAction="#pressmult"/>
+        <Button text="1" onAction="#press1" fx:id="1"/>
+        <Button text="2" onAction="#press2" fx:id="2"/>
+        <Button text="3" onAction="#press3" fx:id="3"/>
+        <Button text="×" onAction="#pressmult" fx:id="multiply"/>
     </HBox>
     <HBox spacing="10">
         <Button text="+/-" onAction="#presssign" />
-        <Button text="0" onAction="#press0"/>
-        <Button text="," onAction="#pressdot"/>
-        <Button text="/" onAction="#pressdivide"/>
+        <Button text="0" onAction="#press0" fx:id="0"/>
+        <Button text="," onAction="#pressdot" fx:id="dot"/>
+        <Button text="/" onAction="#pressdivide" fx:id="divide"/>
     </HBox>
     <HBox spacing="10">
-        <Button text="Enter" onAction="#pressEnter" styleClass="enterButton"/>
+        <Button text="Enter" onAction="#pressEnter" styleClass="enterButton" fx:id="enterButton"/>
     </HBox>
 </VBox>
