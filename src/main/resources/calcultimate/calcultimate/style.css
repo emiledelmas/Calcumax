@@ -1,3 +1,10 @@
+@font-face {
+    font-family: "digital-7";
+    src: url('digital-7.ttf');
+}
+body {
+    -fx-background-color: #333;
+}
 .button {
     -fx-min-width: 150px;
     -fx-max-width: 150px;
@@ -7,7 +14,38 @@
     -fx-max-width: 630px;
 }
 
-
+.button {
+    -fx-background-color: #353535;
+    -fx-background-insets: 0, 1, 1;
+    -fx-background-radius: 5px, 4px, 3px;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.6), 10, 0, 0, 0);
+}
+.clear-button {
+    -fx-background-color: #DA1012;
+}
+.enterButton {
+    -fx-background-color: #4397DF;
+}
 .button:pressed {
     -fx-translate-y: 4px;
+    -fx-background-color: #555;
+}
+
+
+
+.screenText {
+    -fx-font-family: "digital-7";
+    -fx-text-fill: black;
+    -fx-opacity: 1;
+    -fx-background-color: #a7af7c;
+
+
+}
+
+.welcomeText {
+    -fx-font-family: "digital-7";
+    -fx-text-fill: white;
+
 }
