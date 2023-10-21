@@ -74,14 +74,6 @@ public class CalculatorControler implements CalculatorControlerInterface{
             screenText2.clear();
         }
     }
-    @Override
-    public void change(String accu) {
-
-    }
-
-    @Override
-    public void change(Stack<Double> StackData) {
-    }
 
     public void change() {
         double d;
@@ -98,24 +90,18 @@ public class CalculatorControler implements CalculatorControlerInterface{
         showMemoryInScreen();
     }
 
-    public void change(List<Double> StackData) {
-
-    }
-
-
-
-
-
     public void changeIfAccuIsNotEmpty() {
         if (accu != "") {
             change();
         }
     }
 
+
+    // methods called by number buttons in the GUI
     @FXML
     protected void press0() {
-        accu += "0";
-        screenText.setText(accu);
+        accu += "0"; // Concatenate the digit to the accumulator
+        screenText.setText(accu); // Show the accumulator in the screen TextField
     }
     @FXML
     protected void press1() {
@@ -162,6 +148,9 @@ public class CalculatorControler implements CalculatorControlerInterface{
         accu += "9";
         screenText.setText(accu);
     }
+
+
+    //method for operations, dot, C, Enter, BackSpace and sign
     @FXML
     protected void pressdot() {
         if (!accu.contains(".")) {
@@ -171,7 +160,7 @@ public class CalculatorControler implements CalculatorControlerInterface{
     }
     @FXML
     protected void pressplus() {
-        changeIfAccuIsNotEmpty();
+        changeIfAccuIsNotEmpty(); // If the accumulator is empty, addition can't be done
         m.add();
         showMemoryInScreen();
         accu = "";
@@ -207,17 +196,20 @@ public class CalculatorControler implements CalculatorControlerInterface{
     }
     @FXML
     protected void pressEnter() {
-        if (accu != "") {
+        if (accu != "") { //If accumulator is empty, method change() doesn't need to be called
             change();
         }
     }
     @FXML
     protected void pressBackSpace() {
         if (!accu.isEmpty()) {
-            accu = accu.substring(0, accu.length() - 1);
+            accu = accu.substring(0, accu.length() - 1); // Remove the last character of the accumulator
             screenText.setText(accu);
         }
     }
+
+
+    //change the sign of the number in the screen
     @FXML
     protected void presssign() {
         if (accu != "") {
