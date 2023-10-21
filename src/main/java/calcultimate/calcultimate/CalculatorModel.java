@@ -5,8 +5,8 @@ import java.util.Stack;
 
 public class CalculatorModel implements CalculatorModelInterface {
     // Create a memory of double
-    private Stack<Double> memory;
-    private double accu;
+    private final Stack<Double> memory;
+    private final double accu;
 
     // Constructor
     public CalculatorModel() {

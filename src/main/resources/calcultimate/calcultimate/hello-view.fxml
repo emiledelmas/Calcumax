@@ -14,11 +14,11 @@
     <Label fx:id="welcomeText" text="Calcultimate" styleClass="welcomeText"/>
 
     <!-- New label with rectangle stroke -->
-    <TextField text="" fx:id="screenText2" styleClass="screenText"
+    <TextField fx:id="screenText2" styleClass="screenText"
                disable="true"/>
-    <TextField text="" fx:id="screenText1" styleClass="screenText"
+    <TextField fx:id="screenText1" styleClass="screenText"
                disable="true"/>
-    <TextField text="" fx:id="screenText" styleClass="screenText"
+    <TextField fx:id="screenText" styleClass="screenText"
                disable="true"/>
     <HBox spacing="330">
         <Button text="C" onAction="#pressC" styleClass="clear-button"/>
@@ -49,6 +49,6 @@
         <Button text="/" onAction="#pressdivide" fx:id="divide"/>
     </HBox>
     <HBox spacing="10">
-        <Button text="Enter" onAction="#pressEnter" styleClass="enterButton" fx:id="enterButton"/>
+        <Button text="Enter" onAction="#pressEnter" styleClass="enterButton" fx:id="enterBtn"/>
     </HBox>
 </VBox>

@@ -1,27 +1,16 @@
 package calcultimate.calcultimate;
 
-import java.util.EventObject;
-import java.util.List;
-import java.util.Stack;
-
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.util.Duration;
 
-public class CalculatorControler implements CalculatorControlerInterface{
-    String accu;
-    CalculatorModel m;
-
-    private Timeline blinkAnimation;
-    @FXML
-    private Label welcomeText;
+public class CalculatorControler implements CalculatorControlerInterface {
+    private String accu;
+    private final CalculatorModel m;
 
     @FXML
     private TextField screenText;
@@ -29,14 +18,18 @@ public class CalculatorControler implements CalculatorControlerInterface{
     private TextField screenText1;
     @FXML
     private TextField screenText2;
+
     public CalculatorControler() {
         accu = "";
         m = new CalculatorModel();
         initializeBlinkAnimation();
     }
+
     private void initializeBlinkAnimation() {
-        blinkAnimation = new Timeline(
-                new KeyFrame(Duration.seconds(0.5), new EventHandler<ActionEvent>() {
+        // Show the underscore by appending it to the text
+        // Hide the underscore by displaying only the content of accu
+        Timeline blinkAnimation = new Timeline(
+                new KeyFrame(Duration.seconds(0.5), new EventHandler<>() {
                     private boolean isBlinkOn = true;
 
                     @Override
@@ -55,21 +48,20 @@ public class CalculatorControler implements CalculatorControlerInterface{
         blinkAnimation.setCycleCount(Timeline.INDEFINITE); // Repeat indefinitely
         blinkAnimation.play();
     }
-    public void showMemoryInScreen(){
+
+    public void showMemoryInScreen() {
         int memorySize = m.getMemorySize();
+        screenText.clear();
         if (memorySize >= 2) {
-            // Si la pile a deux éléments, affichez-les dans les deux premiers TextField
-            screenText.clear();
+            // If the stack has two or more elements, show the two first elements in the first and second TextField
             screenText1.setText(String.valueOf(m.memoryGetter(-1)));
             screenText2.setText(String.valueOf(m.memoryGetter(-2)));
         } else if (memorySize == 1) {
-            // Si la pile a un élément, affichez-le dans le premier TextField
-            screenText1.clear();
+            // If the stack has one element, show the first element in the first TextField
             screenText1.setText(String.valueOf(m.memoryGetter(-1)));
-            screenText2.clear(); // Effacez le troisième TextField
+            screenText2.clear(); // Clear the second TextField
         } else {
-            // Si la pile est vide, effacez tous les TextField
-            screenText.clear();
+            // If the stack is empty, clear the two first TextField
             screenText1.clear();
             screenText2.clear();
         }
@@ -86,12 +78,11 @@ public class CalculatorControler implements CalculatorControlerInterface{
         }
         // Convert to string
         accu = "";
-        screenText.setText(accu);
         showMemoryInScreen();
     }
 
     public void changeIfAccuIsNotEmpty() {
-        if (accu != "") {
+        if (!accu.isEmpty()) {
             change();
         }
     }
@@ -103,47 +94,56 @@ public class CalculatorControler implements CalculatorControlerInterface{
         accu += "0"; // Concatenate the digit to the accumulator
         screenText.setText(accu); // Show the accumulator in the screen TextField
     }
+
     @FXML
     protected void press1() {
         accu += "1";
         screenText.setText(accu);
     }
+
     @FXML
     protected void press2() {
         accu += "2";
         screenText.setText(accu);
     }
+
     @FXML
     protected void press3() {
         accu += "3";
         screenText.setText(accu);
     }
+
     @FXML
     protected void press4() {
         accu += "4";
         screenText.setText(accu);
     }
+
     @FXML
     protected void press5() {
         accu += "5";
         screenText.setText(accu);
     }
+
     @FXML
     protected void press6() {
         accu += "6";
         screenText.setText(accu);
     }
+
     @FXML
     protected void press7() {
         accu += "7";
         screenText.setText(accu);
     }
+
     @FXML
     protected void press8() {
         accu += "8";
         screenText.setText(accu);
     }
-        @FXML
+
+    @FXML
     protected void press9() {
         accu += "9";
         screenText.setText(accu);
@@ -158,6 +158,7 @@ public class CalculatorControler implements CalculatorControlerInterface{
             screenText.setText(accu);
         }
     }
+
     @FXML
     protected void pressplus() {
         changeIfAccuIsNotEmpty(); // If the accumulator is empty, addition can't be done
@@ -165,6 +166,7 @@ public class CalculatorControler implements CalculatorControlerInterface{
         showMemoryInScreen();
         accu = "";
     }
+
     @FXML
     protected void pressminus() {
         changeIfAccuIsNotEmpty();
@@ -172,6 +174,7 @@ public class CalculatorControler implements CalculatorControlerInterface{
         accu = "";
         showMemoryInScreen();
     }
+
     @FXML
     protected void pressmult() {
         changeIfAccuIsNotEmpty();
@@ -179,6 +182,7 @@ public class CalculatorControler implements CalculatorControlerInterface{
         accu = "";
         showMemoryInScreen();
     }
+
     @FXML
     protected void pressC() {
         m.clear();
@@ -187,6 +191,7 @@ public class CalculatorControler implements CalculatorControlerInterface{
         screenText1.clear();
         screenText2.clear();
     }
+
     @FXML
     protected void pressdivide() {
         changeIfAccuIsNotEmpty();
@@ -194,12 +199,15 @@ public class CalculatorControler implements CalculatorControlerInterface{
         accu = "";
         showMemoryInScreen();
     }
+
     @FXML
     protected void pressEnter() {
-        if (accu != "") { //If accumulator is empty, method change() doesn't need to be called
+        System.out.println("enter"+accu);
+        if (!accu.isEmpty()) { //If accumulator is empty, method change() doesn't need to be called
             change();
         }
     }
+
     @FXML
     protected void pressBackSpace() {
         if (!accu.isEmpty()) {
@@ -212,21 +220,18 @@ public class CalculatorControler implements CalculatorControlerInterface{
     //change the sign of the number in the screen
     @FXML
     protected void presssign() {
-        if (accu != "") {
-        if (accu.contains(".")) {
-            double d = Double.parseDouble(accu);
-            accu = Double.toString(-d);
+        if (!accu.isEmpty()) {
+            if (accu.contains(".")) {
+                double d = Double.parseDouble(accu);
+                accu = Double.toString(-d);
+            } else {
+                int d = Integer.parseInt(accu);
+                accu = Integer.toString(-d);
+            }
+            screenText.setText(accu);
         } else {
-            int d = Integer.parseInt(accu);
-            accu = Integer.toString(-d);
-        }
-        screenText.setText(accu);
-    }
-        else {
             m.opposite();
             showMemoryInScreen();
-            }
-
+        }
     }
-
 }
