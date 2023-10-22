@@ -9,9 +9,8 @@ import javafx.event.EventHandler;
 import javafx.util.Duration;
 
 public class CalculatorControler implements CalculatorControlerInterface {
-    private String accu;
     private final CalculatorModel m;
-
+    private String accu;
     @FXML
     private TextField screenText;
     @FXML
@@ -28,23 +27,21 @@ public class CalculatorControler implements CalculatorControlerInterface {
     private void initializeBlinkAnimation() {
         // Show the underscore by appending it to the text
         // Hide the underscore by displaying only the content of accu
-        Timeline blinkAnimation = new Timeline(
-                new KeyFrame(Duration.seconds(0.5), new EventHandler<>() {
-                    private boolean isBlinkOn = true;
+        Timeline blinkAnimation = new Timeline(new KeyFrame(Duration.seconds(0.5), new EventHandler<>() {
+            private boolean isBlinkOn = true;
 
-                    @Override
-                    public void handle(ActionEvent event) {
-                        if (isBlinkOn) {
-                            // Show the underscore by appending it to the text
-                            screenText.setText(accu + "_");
-                        } else {
-                            // Hide the underscore by displaying only the content of accu
-                            screenText.setText(accu);
-                        }
-                        isBlinkOn = !isBlinkOn;
-                    }
-                })
-        );
+            @Override
+            public void handle(ActionEvent event) {
+                if (isBlinkOn) {
+                    // Show the underscore by appending it to the text
+                    screenText.setText(accu + "_");
+                } else {
+                    // Hide the underscore by displaying only the content of accu
+                    screenText.setText(accu);
+                }
+                isBlinkOn = !isBlinkOn;
+            }
+        }));
         blinkAnimation.setCycleCount(Timeline.INDEFINITE); // Repeat indefinitely
         blinkAnimation.play();
     }
@@ -87,68 +84,18 @@ public class CalculatorControler implements CalculatorControlerInterface {
         }
     }
 
-
-    // methods called by number buttons in the GUI
-    @FXML
-    protected void press0() {
-        accu += "0"; // Concatenate the digit to the accumulator
-        screenText.setText(accu); // Show the accumulator in the screen TextField
-    }
-
-    @FXML
-    protected void press1() {
-        accu += "1";
+    // Handle number button presses
+    private void handleNumberPress(String digit) {
+        accu += digit;
         screenText.setText(accu);
     }
 
+    // Use a loop to define number button handlers
     @FXML
-    protected void press2() {
-        accu += "2";
-        screenText.setText(accu);
+    private void handleNumberButton(ActionEvent event) {
+        String digit = ((javafx.scene.control.Button) event.getSource()).getText();
+        handleNumberPress(digit);
     }
-
-    @FXML
-    protected void press3() {
-        accu += "3";
-        screenText.setText(accu);
-    }
-
-    @FXML
-    protected void press4() {
-        accu += "4";
-        screenText.setText(accu);
-    }
-
-    @FXML
-    protected void press5() {
-        accu += "5";
-        screenText.setText(accu);
-    }
-
-    @FXML
-    protected void press6() {
-        accu += "6";
-        screenText.setText(accu);
-    }
-
-    @FXML
-    protected void press7() {
-        accu += "7";
-        screenText.setText(accu);
-    }
-
-    @FXML
-    protected void press8() {
-        accu += "8";
-        screenText.setText(accu);
-    }
-
-    @FXML
-    protected void press9() {
-        accu += "9";
-        screenText.setText(accu);
-    }
-
 
     //method for operations, dot, C, Enter, BackSpace and sign
     @FXML
@@ -170,7 +117,7 @@ public class CalculatorControler implements CalculatorControlerInterface {
     @FXML
     protected void pressminus() {
         changeIfAccuIsNotEmpty();
-        m.substract();
+        m.subtract();
         accu = "";
         showMemoryInScreen();
     }
@@ -202,7 +149,7 @@ public class CalculatorControler implements CalculatorControlerInterface {
 
     @FXML
     protected void pressEnter() {
-        System.out.println("enter"+accu);
+        System.out.println("enter" + accu);
         if (!accu.isEmpty()) { //If accumulator is empty, method change() doesn't need to be called
             change();
         }
@@ -215,7 +162,6 @@ public class CalculatorControler implements CalculatorControlerInterface {
             screenText.setText(accu);
         }
     }
-
 
     //change the sign of the number in the screen
     @FXML

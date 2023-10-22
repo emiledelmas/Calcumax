@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.TextField?>
-
 
 <VBox xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="calcultimate.calcultimate.CalculatorControler"
@@ -13,41 +11,44 @@
 
     <Label fx:id="welcomeText" text="Calcultimate" styleClass="welcomeText"/>
 
-    <!-- New label with rectangle stroke -->
-    <TextField fx:id="screenText2" styleClass="screenText"
-               disable="true"/>
-    <TextField fx:id="screenText1" styleClass="screenText"
-               disable="true"/>
-    <TextField fx:id="screenText" styleClass="screenText"
-               disable="true"/>
+    <TextField fx:id="screenText2" styleClass="screenText" disable="true"/>
+    <TextField fx:id="screenText1" styleClass="screenText" disable="true"/>
+    <TextField fx:id="screenText" styleClass="screenText" disable="true"/>
+
     <HBox spacing="330">
         <Button text="C" onAction="#pressC" styleClass="clear-button"/>
         <Button text="←" onAction="#pressBackSpace" fx:id="backspace"/>
     </HBox>
+
+    <!-- Number buttons with a common event handler -->
     <HBox spacing="10">
-        <Button text="7" onAction="#press7" fx:id="7"/>
-        <Button text="8" onAction="#press8" fx:id="8"/>
-        <Button text="9" onAction="#press9" fx:id="9"/>
+        <Button text="7" onAction="#handleNumberButton" fx:id="7"/>
+        <Button text="8" onAction="#handleNumberButton" fx:id="8"/>
+        <Button text="9" onAction="#handleNumberButton" fx:id="9"/>
         <Button text="+" onAction="#pressplus" fx:id="plus"/>
     </HBox>
+
     <HBox spacing="10">
-        <Button text="4" onAction="#press4" fx:id="4"/>
-        <Button text="5" onAction="#press5" fx:id="5"/>
-        <Button text="6" onAction="#press6" fx:id="6"/>
+        <Button text="4" onAction="#handleNumberButton" fx:id="4"/>
+        <Button text="5" onAction="#handleNumberButton" fx:id="5"/>
+        <Button text="6" onAction="#handleNumberButton" fx:id="6"/>
         <Button text="-" onAction="#pressminus" fx:id="minus"/>
     </HBox>
+
     <HBox spacing="10">
-        <Button text="1" onAction="#press1" fx:id="1"/>
-        <Button text="2" onAction="#press2" fx:id="2"/>
-        <Button text="3" onAction="#press3" fx:id="3"/>
+        <Button text="1" onAction="#handleNumberButton" fx:id="1"/>
+        <Button text="2" onAction="#handleNumberButton" fx:id="2"/>
+        <Button text="3" onAction="#handleNumberButton" fx:id="3"/>
         <Button text="×" onAction="#pressmult" fx:id="multiply"/>
     </HBox>
+
     <HBox spacing="10">
         <Button text="+/-" onAction="#presssign" />
-        <Button text="0" onAction="#press0" fx:id="0"/>
+        <Button text="0" onAction="#handleNumberButton" fx:id="0"/>
         <Button text="," onAction="#pressdot" fx:id="dot"/>
         <Button text="/" onAction="#pressdivide" fx:id="divide"/>
     </HBox>
+
     <HBox spacing="10">
         <Button text="Enter" onAction="#pressEnter" styleClass="enterButton" fx:id="enterBtn"/>
     </HBox>
