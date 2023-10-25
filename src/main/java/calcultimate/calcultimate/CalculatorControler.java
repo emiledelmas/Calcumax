@@ -149,7 +149,6 @@ public class CalculatorControler implements CalculatorControlerInterface {
 
     @FXML
     protected void pressEnter() {
-        System.out.println("enter" + accu);
         if (!accu.isEmpty()) { //If accumulator is empty, method change() doesn't need to be called
             change();
         }

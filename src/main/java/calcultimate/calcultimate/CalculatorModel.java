@@ -71,10 +71,10 @@ public class CalculatorModel implements CalculatorModelInterface {
         if (memory.size() > 1) {
             double n1 = memory.pop();
             double n2 = memory.pop();
-            if (n2 == 0) {
+            if (n1 == 0) {
                 System.out.println("You can't divide by 0");
             } else {
-                memory.add(n1 / n2);
+                memory.add(n2 / n1);
             }
         }
     }
