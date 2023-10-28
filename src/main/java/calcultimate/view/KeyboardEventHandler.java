@@ -1,4 +1,4 @@
-package calcultimate.calcultimate;
+package calcultimate.view;
 
 import javafx.scene.Parent;
 import javafx.scene.control.Button;

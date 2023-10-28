@@ -1,4 +1,4 @@
-package calcultimate.calcultimate;
+package calcultimate.model;
 
 // Import memory
 
@@ -72,7 +72,7 @@ public class CalculatorModel implements CalculatorModelInterface {
             double n1 = memory.pop();
             double n2 = memory.pop();
             if (n1 == 0) {
-                System.out.println("You can't divide by 0");
+                throw new ArithmeticException("Division by 0");
             } else {
                 memory.add(n2 / n1);
             }
@@ -148,12 +148,8 @@ public class CalculatorModel implements CalculatorModelInterface {
      * @param i The index of the value to retrieve.
      * @return The value at the specified index.
      */
-    public double memoryGetter(int i) {
-        if (i < 0) {
-            return memory.get(memory.size() + i);
-        } else {
-            return memory.get(i);
-        }
+    public Stack<Double> memoryGetter() {
+        return memory;
     }
 
     /**
