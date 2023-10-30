@@ -17,7 +17,9 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
-
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 
 import java.io.IOException;
 import java.net.URL;
@@ -32,7 +34,13 @@ public class CalculatorGUI implements CalculatorGuiInterface {
     private TextField screenText1;
     private TextField screenText2;
 
+    private LineChart<Number,Number> lineChart;
+    private XYChart.Series<Number, Number> series;
+    private boolean isGraphMode = false;
 
+    private Button buttonCalc;
+    private Button buttonGraph;
+    private Button buttonSign;
     public CalculatorGUI(CalculatorControllerInterface controller) {
         accu = "";
         this.controller = controller;
@@ -41,6 +49,8 @@ public class CalculatorGUI implements CalculatorGuiInterface {
     private void initializeBlinkAnimation() {
     // Show the underscore by appending it to the text
     // Hide the underscore by displaying only the content of accu
+    Button buttonSwitchMode = new Button("Switch Mode");
+    buttonSwitchMode.setOnAction(event -> switchMode());
     Timeline blinkAnimation = new Timeline(new KeyFrame(Duration.seconds(0.5), new EventHandler<>() {
         private boolean isBlinkOn = true;
 
@@ -63,11 +73,51 @@ public class CalculatorGUI implements CalculatorGuiInterface {
         blinkAnimation.setCycleCount(Timeline.INDEFINITE); // Repeat indefinitely
         blinkAnimation.play();
     }
+    private void switchMode() {
+        if(isGraphMode) {
+            // Passer en mode calculatrice
+            lineChart.setVisible(false);
+            lineChart.setMinSize(0, 0);
+            lineChart.setMaxSize(0, 0);
+            screenText1.setVisible(true);
+            screenText1.setMinSize(615, 55);
+            screenText1.setMaxSize(615, 55);
+            screenText2.setVisible(true);
+            screenText2.setMinSize(615, 55);
+            screenText2.setMaxSize(615, 55);
+            buttonCalc.setStyle("-fx-background-color: #aaa");
+            buttonGraph.setStyle("-fx-background-color: #353535");
+            buttonSign.setText("+/-");
+        } else {
+            // Passer en mode graphique
+            lineChart.setVisible(true);
+            lineChart.setMinSize(640, 200);
+            lineChart.setMaxSize(640, 200);
+//            remove the white rectangle below the graph
+            lineChart.autosize();
+            screenText1.setVisible(false);
+            screenText1.setMinSize(0, 0);
+            screenText1.setMaxSize(0, 0);
+            screenText2.setVisible(false);
+            screenText2.setMinSize(0, 0);
+            screenText2.setMaxSize(0, 0);
+            buttonGraph.setStyle("-fx-background-color: #aaa");
+            buttonCalc.setStyle("-fx-background-color: #353535");
+            buttonSign.setText("x");
+
+        }
+        isGraphMode = !isGraphMode;
+    }
     public Scene affiche() throws IOException {
 
         // Création des éléments de la fenêtre
         Label labelCalcultimate = new Label("Calcultimate");
         labelCalcultimate.getStyleClass().add("welcomeText");
+
+        lineChart = new LineChart<>(new NumberAxis(), new NumberAxis());
+        series = new XYChart.Series<>();
+        lineChart.getData().add(series);
+
 
         screenText2 = new TextField();
         screenText2.getStyleClass().add("screenText");
@@ -90,8 +140,20 @@ public class CalculatorGUI implements CalculatorGuiInterface {
         buttonBackspace.setId("backspace");
         buttonBackspace.setOnAction(event -> pressBackSpace());
 
-        HBox hboxClear = new HBox(330);
-        hboxClear.getChildren().addAll(buttonC, buttonBackspace);
+        buttonCalc = new Button("Calculator");
+        buttonCalc.setId("CalcBtn");
+        buttonCalc.getStyleClass().add("modeButton");
+        buttonCalc.setStyle("-fx-background-color: #aaa");
+        buttonCalc.setOnAction(event -> switchMode());
+
+
+        buttonGraph = new Button("Graph");
+        buttonGraph.setId("GraphBtn");
+        buttonGraph.getStyleClass().add("modeButton");
+        buttonGraph.setOnAction(event -> switchMode());
+
+        HBox hboxClear = new HBox(10);
+        hboxClear.getChildren().addAll(buttonC, buttonCalc, buttonGraph,buttonBackspace);
 
         Button button7 = new Button("7");
         button7.setId("7");
@@ -150,7 +212,7 @@ public class CalculatorGUI implements CalculatorGuiInterface {
         HBox hboxRow3 = new HBox(10);
         hboxRow3.getChildren().addAll(button1, button2, button3, buttonMultiply);
 
-        Button buttonSign = new Button("+/-");
+        buttonSign = new Button("+/-");
         buttonSign.setId("opposite");
         buttonSign.setOnAction(event -> pressSign());
 
@@ -169,6 +231,7 @@ public class CalculatorGUI implements CalculatorGuiInterface {
         HBox hboxRow4 = new HBox(10);
         hboxRow4.getChildren().addAll(buttonSign, button0, buttonDot, buttonDivide);
 
+
         Button buttonEnter = new Button("Enter");
         buttonEnter.setId("enterBtn");
         buttonEnter.getStyleClass().add("enterButton");
@@ -176,6 +239,8 @@ public class CalculatorGUI implements CalculatorGuiInterface {
 
         HBox hboxRow5 = new HBox(10);
         hboxRow5.getChildren().add(buttonEnter);
+
+
 
         // Création du conteneur principal et ajout des éléments
         VBox container = new VBox(10);
@@ -185,6 +250,7 @@ public class CalculatorGUI implements CalculatorGuiInterface {
         container.setStyle("-fx-font-size: 300%;-fx-background-color: #1D1D1D");
         container.getChildren().addAll(
                 labelCalcultimate,
+                lineChart,
                 screenText2,
                 screenText1,
                 screenText,
@@ -195,7 +261,7 @@ public class CalculatorGUI implements CalculatorGuiInterface {
                 hboxRow4,
                 hboxRow5
         );
-        Scene scene = new Scene(container, 640, 800);
+        Scene scene = new Scene(container, 640, 900);
         KeyboardEventHandler keyboardEventHandler = new KeyboardEventHandler(container);
         scene.addEventFilter(KeyEvent.KEY_PRESSED, keyboardEventHandler::handleKeyEvent);
 
@@ -292,8 +358,15 @@ public class CalculatorGUI implements CalculatorGuiInterface {
     }
 
     public void pressEnter() {
-        changeControllerIfNotEmpty();
-        change(controller.getMemory());
+        if(isGraphMode) {
+            double xValue = Double.parseDouble(screenText1.getText());
+            double yValue = Double.parseDouble(screenText2.getText());
+            series.getData().add(new XYChart.Data<>(xValue, yValue));
+        }
+        else {
+            changeControllerIfNotEmpty();
+            change(controller.getMemory());
+        }
     }
 
     public void pressBackSpace() {

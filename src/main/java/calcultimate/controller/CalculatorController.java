@@ -5,11 +5,9 @@ import java.util.Stack;
 
 public class CalculatorController implements CalculatorControllerInterface {
 
-    private String accu;
     private CalculatorModelInterface m;
 
     public CalculatorController(CalculatorModelInterface model) {
-        accu = "";
         m = model;
     }
 
