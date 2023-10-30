@@ -91,8 +91,8 @@ public class CalculatorGUI implements CalculatorGuiInterface {
         } else {
             // Passer en mode graphique
             lineChart.setVisible(true);
-            lineChart.setMinSize(640, 200);
-            lineChart.setMaxSize(640, 200);
+            lineChart.setMinSize(640, 180);
+            lineChart.setMaxSize(640, 180);
 //            remove the white rectangle below the graph
             lineChart.autosize();
             screenText1.setVisible(false);
@@ -117,6 +117,9 @@ public class CalculatorGUI implements CalculatorGuiInterface {
         lineChart = new LineChart<>(new NumberAxis(), new NumberAxis());
         series = new XYChart.Series<>();
         lineChart.getData().add(series);
+        lineChart.setVisible(false);
+        lineChart.setMinSize(0, 0);
+        lineChart.setMaxSize(0, 0);
 
 
         screenText2 = new TextField();
@@ -316,24 +319,42 @@ public class CalculatorGUI implements CalculatorGuiInterface {
     }
 
     public void pressPlus() {
+        if (isGraphMode) {
+            accu += "+";
+            screenText.setText(accu);
+        }
+        else {
         changeControllerIfNotEmpty();
         controller.add();
         accu = "";
         change(controller.getMemory());
+        }
     }
 
     public void pressMinus() {
+        if (isGraphMode) {
+            accu += "-";
+            screenText.setText(accu);
+        }
+        else {
         changeControllerIfNotEmpty();
         controller.minus();
         accu = "";
         change(controller.getMemory());
+        }
     }
 
     public void pressMult() {
-        changeControllerIfNotEmpty();
-        controller.multiply();
-        accu = "";
-        change(controller.getMemory());
+        if (isGraphMode) {
+            accu += "*";
+            screenText.setText(accu);
+        }
+        else {
+            changeControllerIfNotEmpty();
+            controller.multiply();
+            accu = "";
+            change(controller.getMemory());
+        }
     }
 
     public void pressC() {
@@ -346,6 +367,11 @@ public class CalculatorGUI implements CalculatorGuiInterface {
 
 
     public void pressDivide() {
+        if (isGraphMode) {
+            accu += "/";
+            screenText.setText(accu);
+        }
+        else {
         changeControllerIfNotEmpty();
         try {
             controller.divide();
@@ -355,6 +381,7 @@ public class CalculatorGUI implements CalculatorGuiInterface {
             screenText.setText("ERR : Division by 0");
         }
         accu = "";
+        }
     }
 
     public void pressEnter() {
@@ -379,6 +406,11 @@ public class CalculatorGUI implements CalculatorGuiInterface {
     //change the sign of the number in the screen
 
     public void pressSign() {
+        if (isGraphMode) {
+            accu += "x";
+            screenText.setText(accu);
+        }
+        else {
         if (!accu.isEmpty()) {
             if (accu.contains(".")) {
                 double d = Double.parseDouble(accu);
@@ -391,6 +423,7 @@ public class CalculatorGUI implements CalculatorGuiInterface {
         } else {
             controller.opposite();
             change(controller.getMemory());
+        }
         }
     }
 }
