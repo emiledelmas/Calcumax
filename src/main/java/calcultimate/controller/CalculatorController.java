@@ -2,20 +2,35 @@ package calcultimate.controller;
 
 import calcultimate.model.CalculatorModelInterface;
 import java.util.Stack;
-
+/**
+ * The CalculatorController class is responsible for controlling the interactions between
+ * the user interface and the calculator model. It implements the CalculatorControllerInterface
+ * to define the operations that can be performed on the calculator.
+ *
+ * @author Emile Delmas and Guillaume Demoor
+ * @version 1.0
+ */
 public class CalculatorController implements CalculatorControllerInterface {
 
-    private String accu;
-    private CalculatorModelInterface m;
+    private final CalculatorModelInterface m;
 
+    /**
+     * Constructs a new CalculatorController with the given calculator model.
+     *
+     * @param model The CalculatorModelInterface to be associated with this controller.
+     */
     public CalculatorController(CalculatorModelInterface model) {
-        accu = "";
         m = model;
     }
 
+    /**
+     * Send the String accu to the model.
+     *
+     * @param accu The new accumulated value as a String.
+     */
     public void change(String accu) {
         double d;
-        //Try to convert to double
+        // Try to convert to double
         try {
             d = Double.parseDouble(accu);
             m.push(d);
@@ -24,24 +39,40 @@ public class CalculatorController implements CalculatorControllerInterface {
         }
     }
 
+    /**
+     * Adds the current accumulated value to the calculator's memory stack.
+     */
     public void add() {
         m.add();
     }
 
+    /**
+     * Subtracts the current accumulated value from the calculator's memory.
+     */
     public void minus() {
         m.subtract();
     }
 
+    /**
+     * Multiplies the current accumulated value with the value in the calculator's memory.
+     */
     public void multiply() {
         m.multiply();
     }
 
+    /**
+     * Clears the calculator's memory and accumulated value.
+     */
     public void clear() {
         m.clear();
     }
 
-
-    public void divide() {
+    /**
+     * Divides the value in the calculator's memory by the current accumulated value.
+     *
+     * @throws ArithmeticException if division by 0 is attempted.
+     */
+    public void divide() throws ArithmeticException {
         try {
             m.divide();
         } catch (ArithmeticException e) {
@@ -49,11 +80,18 @@ public class CalculatorController implements CalculatorControllerInterface {
         }
     }
 
-    //change the sign of the number in the screen
+    /**
+     * Changes the sign of the current accumulated value on the screen.
+     */
     public void opposite() {
-            m.opposite();
+        m.opposite();
     }
 
+    /**
+     * Retrieves the memory stack containing previously stored values.
+     *
+     * @return A Stack of Double values representing the calculator's memory.
+     */
     public Stack<Double> getMemory() {
         return m.memoryGetter();
     }

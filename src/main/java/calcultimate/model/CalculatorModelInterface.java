@@ -1,6 +1,5 @@
 package calcultimate.model;
 
-
 import java.util.Stack;
 
 public interface CalculatorModelInterface {
@@ -13,9 +12,7 @@ public interface CalculatorModelInterface {
     void push(double number);
     double pop();
     void swap();
+    void drop();
     void clear();
-
-    int getMemorySize();
-
     Stack<Double> memoryGetter();
 }

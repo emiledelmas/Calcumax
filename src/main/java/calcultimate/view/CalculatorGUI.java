@@ -5,10 +5,8 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -18,54 +16,70 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
-
-import java.io.IOException;
 import java.net.URL;
 import java.util.Stack;
 
+/**
+ * The CalculatorGUI class represents the graphical user interface of the calculator.
+ */
 public class CalculatorGUI implements CalculatorGuiInterface {
 
     private String accu;
-    private CalculatorControllerInterface controller;
-
+    private final CalculatorControllerInterface controller;
     private TextField screenText;
     private TextField screenText1;
     private TextField screenText2;
 
-
+    /**
+     * Constructs a new CalculatorGUI with the provided controller and initializes the blinking animation.
+     *
+     * @param controller The calculator controller.
+     */
     public CalculatorGUI(CalculatorControllerInterface controller) {
         accu = "";
         this.controller = controller;
         initializeBlinkAnimation();
     }
+
+    /**
+     * Initializes the blinking animation for the text field to indicate active input.
+     */
     private void initializeBlinkAnimation() {
-    // Show the underscore by appending it to the text
-    // Hide the underscore by displaying only the content of accu
-    Timeline blinkAnimation = new Timeline(new KeyFrame(Duration.seconds(0.5), new EventHandler<>() {
-        private boolean isBlinkOn = true;
+        // Initialize the blinking animation timeline
+        Timeline blinkAnimation = new Timeline(new KeyFrame(Duration.seconds(0.5), new EventHandler<>() {
 
-        @Override
-        public void handle(ActionEvent event) {
-//            If there is a _ at the end remove it :
-            if (screenText.getText().endsWith("_")) {
-                screenText.setText(screenText.getText().substring(0, screenText.getText().length() - 1));
-            }
+            private boolean isBlinkOn = true; // Toggle blink state
 
-            if (isBlinkOn) {
-                // Show the underscore by appending it to the text
-                screenText.setText(screenText.getText()+ "_");
-            } else {
-                screenText.setText(screenText.getText());
+            @Override
+            public void handle(ActionEvent event) {
+                // Toggle blink state
+                if (screenText.getText().endsWith("_")) {
+                    screenText.setText(screenText.getText().substring(0, screenText.getText().length() - 1));
+                }
+                if (isBlinkOn) {
+                    screenText.setText(screenText.getText() + "_");
+                } else {
+                    screenText.setText(screenText.getText());
+                }
+                isBlinkOn = !isBlinkOn;
             }
-            isBlinkOn = !isBlinkOn;
-        }
-    }));
-        blinkAnimation.setCycleCount(Timeline.INDEFINITE); // Repeat indefinitely
+        }));
+
+        // Set infinite cycle
+        blinkAnimation.setCycleCount(Timeline.INDEFINITE);
+
+        // Start animation
         blinkAnimation.play();
     }
-    public Scene affiche() throws IOException {
 
-        // Création des éléments de la fenêtre
+    /**
+     * Creates and returns the JavaFX scene representing the calculator GUI.
+     *
+     * @return The JavaFX Scene for the calculator.
+     */
+    public Scene affiche() {
+
+        // Creation of the different elements of the calculator
         Label labelCalcultimate = new Label("Calcultimate");
         labelCalcultimate.getStyleClass().add("welcomeText");
 
@@ -177,7 +191,7 @@ public class CalculatorGUI implements CalculatorGuiInterface {
         HBox hboxRow5 = new HBox(10);
         hboxRow5.getChildren().add(buttonEnter);
 
-        // Création du conteneur principal et ajout des éléments
+        // Creation of the main container
         VBox container = new VBox(10);
         container.setAlignment(Pos.CENTER);
         container.setSpacing(10);
@@ -196,6 +210,7 @@ public class CalculatorGUI implements CalculatorGuiInterface {
                 hboxRow5
         );
         Scene scene = new Scene(container, 640, 800);
+
         KeyboardEventHandler keyboardEventHandler = new KeyboardEventHandler(container);
         scene.addEventFilter(KeyEvent.KEY_PRESSED, keyboardEventHandler::handleKeyEvent);
 
@@ -208,40 +223,52 @@ public class CalculatorGUI implements CalculatorGuiInterface {
             System.err.println("CSS file not found, check the folder 'ressources'");
         }
 
+
         return scene;
     }
+    /**
+     * Changes the displayed memory stack on the UI based on the provided memory stack.
+     *
+     * @param memory The memory stack to be displayed.
+     */
     public void change(Stack<Double> memory) {
         int memorySize = memory.size();
         screenText.clear();
         if (memorySize >= 2) {
-            // If the stack has two or more elements, show the two first elements in the first and second TextField
             screenText1.setText(String.valueOf(memory.get(memorySize - 1)));
             screenText2.setText(String.valueOf(memory.get(memorySize - 2)));
         } else if (memorySize == 1) {
-            // If the stack has one element, show the first element in the first TextField
             screenText1.setText(String.valueOf(memory.get(0)));
-            screenText2.clear(); // Clear the second TextField
+            screenText2.clear();
         } else {
-            // If the stack is empty, clear the two first TextField
             screenText1.clear();
             screenText2.clear();
         }
     }
 
-    public void changeControllerIfNotEmpty(){
+    /**
+     * Changes the controller's input value if the accumulator is not empty.
+     */
+    public void changeControllerIfNotEmpty() {
         if (!accu.isEmpty()) {
             controller.change(accu);
             accu = "";
         }
     }
-    // Handle number button presses
+
+    /**
+     * Handles number button press by appending digit to accumulator.
+     *
+     * @param digit The digit pressed
+     */
     private void handleNumberPress(String digit) {
         accu += digit;
         screenText.setText(accu);
     }
 
-
-    //method for operations, dot, C, Enter, BackSpace and sign
+    /**
+     * Handles decimal point button press.
+     */
     public void pressDot() {
         if (!accu.contains(".")) {
             accu += ".";
@@ -249,6 +276,9 @@ public class CalculatorGUI implements CalculatorGuiInterface {
         }
     }
 
+    /**
+     * Handles plus button press.
+     */
     public void pressPlus() {
         changeControllerIfNotEmpty();
         controller.add();
@@ -256,6 +286,9 @@ public class CalculatorGUI implements CalculatorGuiInterface {
         change(controller.getMemory());
     }
 
+    /**
+     * Handles minus button press.
+     */
     public void pressMinus() {
         changeControllerIfNotEmpty();
         controller.minus();
@@ -263,6 +296,9 @@ public class CalculatorGUI implements CalculatorGuiInterface {
         change(controller.getMemory());
     }
 
+    /**
+     * Handles multiply button press.
+     */
     public void pressMult() {
         changeControllerIfNotEmpty();
         controller.multiply();
@@ -270,6 +306,9 @@ public class CalculatorGUI implements CalculatorGuiInterface {
         change(controller.getMemory());
     }
 
+    /**
+     * Handles clear button press.
+     */
     public void pressC() {
         controller.clear();
         accu = "";
@@ -278,7 +317,9 @@ public class CalculatorGUI implements CalculatorGuiInterface {
         screenText2.setText("");
     }
 
-
+    /**
+     * Handles Divide button press.
+     */
     public void pressDivide() {
         changeControllerIfNotEmpty();
         try {
@@ -291,11 +332,17 @@ public class CalculatorGUI implements CalculatorGuiInterface {
         accu = "";
     }
 
+    /**
+     * Handles enter button press.
+     */
     public void pressEnter() {
         changeControllerIfNotEmpty();
         change(controller.getMemory());
     }
 
+    /**
+     * Handles backspace button press.
+     */
     public void pressBackSpace() {
         if (!accu.isEmpty()) {
             accu = accu.substring(0, accu.length() - 1); // Remove the last character of the accumulator
@@ -303,8 +350,9 @@ public class CalculatorGUI implements CalculatorGuiInterface {
         }
     }
 
-    //change the sign of the number in the screen
-
+    /**
+     * Handles sign change button press.
+     */
     public void pressSign() {
         if (!accu.isEmpty()) {
             if (accu.contains(".")) {

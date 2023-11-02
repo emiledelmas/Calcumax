@@ -1,27 +1,25 @@
 package calcultimate.model;
 
-// Import memory
-
-//import Stack
 import java.util.Stack;
 
 /**
  * The CalculatorModel class represents the core logic for a basic calculator. It provides
  * functionality for performing arithmetic operations and managing a memory stack.
+ *
+ * @author Emile Delmas and Guillaume Demoor
+ * @version 1.0
  */
 public class CalculatorModel implements CalculatorModelInterface {
 
     // Create a Stack of double
     private final Stack<Double> memory;
-    private final double accu;
 
     /**
      * Constructor for creating a new CalculatorModel object. Initializes the memory stack
      * and sets the accumulator to 0.
      */
     public CalculatorModel() {
-        memory = new Stack<Double>();
-        accu = 0;
+        memory = new Stack<>();
     }
 
     // operations methods
@@ -66,6 +64,8 @@ public class CalculatorModel implements CalculatorModelInterface {
      * Divides the second-top value on the memory stack by the top value and pushes the result
      * back onto the stack. If there are fewer than two values on the stack or if the top value is 0,
      * no action is taken.
+     *
+     * @throws ArithmeticException if division by 0 is attempted.
      */
     public void divide() {
         if (memory.size() > 1) {
@@ -116,7 +116,9 @@ public class CalculatorModel implements CalculatorModelInterface {
      * Removes the top value from the memory stack. If the stack is empty, no action is taken.
      */
     public void drop() {
-        memory.pop();
+        if (!memory.isEmpty()) {
+            memory.pop();
+        }
     }
 
     /**
@@ -142,22 +144,11 @@ public class CalculatorModel implements CalculatorModelInterface {
     // Getters
 
     /**
-     * Retrieves a value from the memory stack at the specified index.
-     * Negative index values count from the end of the stack.
+     * Returns the memory stack.
      *
-     * @param i The index of the value to retrieve.
-     * @return The value at the specified index.
+     * @return The value of the memory stack.
      */
     public Stack<Double> memoryGetter() {
         return memory;
-    }
-
-    /**
-     * Gets the current size of the memory stack.
-     *
-     * @return The number of values in the memory stack.
-     */
-    public int getMemorySize() {
-        return memory.size();
     }
 }
