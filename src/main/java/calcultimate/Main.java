@@ -36,10 +36,13 @@ public class Main extends Application {
      */
     @Override
     public void start(Stage primaryStage) throws IOException {
+
+        // Create the calculator model, controller, and GUI objects
         CalculatorModelInterface model = new CalculatorModel();
         CalculatorControllerInterface controller = new CalculatorController(model);
-
         CalculatorGuiInterface gui = new CalculatorGUI(controller);
+
+        // Create the scene and set it on the stage
         Scene scene = gui.affiche();
 
         // Set the stage title

@@ -24,15 +24,17 @@ public class CalculatorController implements CalculatorControllerInterface {
     }
 
     /**
-     * Send the String accu to the model.
+     * Converts the given String to a double and pushes it onto the calculator's memory stack
+     * handled by the model.
      *
-     * @param accu The new accumulated value as a String.
+     * @param accu The String to be converted to a double and pushed onto the memory stack.
      */
     public void change(String accu) {
         double d;
         // Try to convert to double
         try {
             d = Double.parseDouble(accu);
+            // Push the new value onto the memory stack
             m.push(d);
         } catch (NumberFormatException e) {
             System.out.println("Not a number");
@@ -76,6 +78,7 @@ public class CalculatorController implements CalculatorControllerInterface {
         try {
             m.divide();
         } catch (ArithmeticException e) {
+            // throw an exception if division by 0 is attempted
             throw new ArithmeticException("Division by 0");
         }
     }
@@ -95,4 +98,13 @@ public class CalculatorController implements CalculatorControllerInterface {
     public Stack<Double> getMemory() {
         return m.memoryGetter();
     }
+
+    /**
+     * Swaps the two top values of the memory stack.
+     */
+    public void swap() {
+        m.swap();
+    }
+
+
 }

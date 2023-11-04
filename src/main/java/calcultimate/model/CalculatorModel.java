@@ -11,18 +11,15 @@ import java.util.Stack;
  */
 public class CalculatorModel implements CalculatorModelInterface {
 
-    // Create a Stack of double
+    // Create a Stack of doubles
     private final Stack<Double> memory;
 
     /**
-     * Constructor for creating a new CalculatorModel object. Initializes the memory stack
-     * and sets the accumulator to 0.
+     * Constructor for creating a new CalculatorModel object. Initializes the memory stack.
      */
     public CalculatorModel() {
         memory = new Stack<>();
     }
-
-    // operations methods
 
     /**
      * Adds the top two values from the memory stack and pushes the result back onto the stack.
@@ -30,8 +27,10 @@ public class CalculatorModel implements CalculatorModelInterface {
      */
     public void add() {
         if (memory.size() > 1) {
+            // pop the top two values from the stack
             double n1 = memory.pop();
             double n2 = memory.pop();
+            // push the sum back onto the stack
             memory.add(n1 + n2);
         }
     }
@@ -42,8 +41,10 @@ public class CalculatorModel implements CalculatorModelInterface {
      */
     public void subtract() {
         if (memory.size() > 1) {
+            // pop the top two values from the stack
             double n1 = memory.pop();
             double n2 = memory.pop();
+            // push the difference back onto the stack
             memory.add(n2 - n1);
         }
     }
@@ -54,32 +55,35 @@ public class CalculatorModel implements CalculatorModelInterface {
      */
     public void multiply() {
         if (memory.size() > 1) {
+            // pop the top two values from the stack
             double n1 = memory.pop();
             double n2 = memory.pop();
+            // push the product back onto the stack
             memory.add(n1 * n2);
         }
     }
 
     /**
      * Divides the second-top value on the memory stack by the top value and pushes the result
-     * back onto the stack. If there are fewer than two values on the stack or if the top value is 0,
-     * no action is taken.
+     * back onto the stack. If there are fewer than two values on the stack, no action is taken.
      *
      * @throws ArithmeticException if division by 0 is attempted.
      */
     public void divide() {
-        if (memory.size() > 1) {
+        if (memory.size() >= 2) {
+            // pop the top two values from the stack
             double n1 = memory.pop();
             double n2 = memory.pop();
+            // if the divisor is 0, throw an exception
             if (n1 == 0) {
+                // throw an exception if division by 0 is attempted
                 throw new ArithmeticException("Division by 0");
             } else {
+                // push the quotient back onto the stack
                 memory.add(n2 / n1);
             }
         }
     }
-
-    // method corresponding to sign changing button
 
     /**
      * Changes the sign of the top value on the memory stack by multiplying it by -1.
@@ -87,12 +91,11 @@ public class CalculatorModel implements CalculatorModelInterface {
      */
     public void opposite() {
         if (!memory.isEmpty()) {
+            // pop the top value from the stack and push its opposite back onto the stack
             double n1 = memory.pop();
             memory.add(-n1);
         }
     }
-
-    // Classical methods for stacks
 
     /**
      * Pushes a given number onto the memory stack.
@@ -127,6 +130,7 @@ public class CalculatorModel implements CalculatorModelInterface {
      */
     public void swap() {
         if (memory.size() > 1) {
+            // pop the top two values from the stack and push them back in the opposite order
             double n1 = memory.pop();
             double n2 = memory.pop();
             memory.add(n1);
@@ -141,8 +145,7 @@ public class CalculatorModel implements CalculatorModelInterface {
         memory.clear();
     }
 
-    // Getters
-
+    // Getter for the memory stack
     /**
      * Returns the memory stack.
      *
