@@ -1,14 +1,13 @@
+/**
+ * The calcultimate module is the main module for the Calcultimate calculator application.
+ * It specifies the required dependencies and exports the necessary packages for the application to function.
+ *  JavaFX is required for the application to run.
+ */
 module calcultimate {
     requires javafx.controls;
-    requires javafx.fxml;
-
 
     exports calcultimate.model;
-    opens calcultimate.model to javafx.fxml;
     exports calcultimate.controller;
-    opens calcultimate.controller to javafx.fxml;
     exports calcultimate.view;
-    opens calcultimate.view to javafx.fxml;
     exports calcultimate;
-    opens calcultimate to javafx.fxml;
 }
