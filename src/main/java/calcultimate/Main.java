@@ -20,6 +20,12 @@ import java.io.IOException;
 public class Main extends Application {
 
     /**
+     * The default constructor for the Main class.
+     */
+    public Main() {
+    }
+
+    /**
      * The main entry point for the application.
      *
      * @param args Command-line arguments (not used in this application).
